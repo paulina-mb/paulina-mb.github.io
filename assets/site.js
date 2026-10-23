@@ -5,7 +5,7 @@
     var ps = hl.querySelectorAll('.tx p');
     var cnt = hl.querySelector('.cnt');
     var bar = hl.querySelector('.bar i');
-    var i = 0, timer = null, hovering = false;
+    var i = 0, timer = null;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // reading time: 3s to find the text + about 0.33s per word (a calm pace), between 7 and 14 seconds
     var dur = function (el) { var w = el.textContent.trim().split(/\s+/).length; return Math.max(7000, Math.min(14000, 3000 + w * 330)); };
@@ -28,7 +28,7 @@
     var stop = function () { if (timer) clearTimeout(timer); timer = null; resetBar(); };
     var start = function () {
       stop();
-      if (reduce || hovering || document.hidden) return;
+      if (reduce || document.hidden) return;
       var ms = dur(ps[i]);
       runBar(ms);
       timer = setTimeout(function () { show(i + 1); start(); }, ms);
@@ -41,9 +41,6 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); go(i + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(i - 1); }
     });
-    // pause only for a real mouse resting on the card (touch screens never "leave", so they are ignored)
-    hl.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovering = true; stop(); } });
-    hl.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hovering = false; start(); } });
     document.addEventListener('visibilitychange', start);
     start();
   }
