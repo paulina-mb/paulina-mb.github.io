@@ -46,9 +46,30 @@
   }
 
 
+  // ---- privacy-friendly visit counter (GoatCounter: no cookies, no personal data) ----
+  var fromCard = /[?&]c\b/.test(location.search);
+  var gcQueue = [];
+  var gc = function (o) { gcQueue.push(o); flush(); };
+  var tries = 0;
+  var flush = function () {
+    if (window.goatcounter && window.goatcounter.count) { while (gcQueue.length) { try { window.goatcounter.count(gcQueue.shift()); } catch (e) {} } return; }
+    if (tries++ < 40) setTimeout(flush, 250);
+  };
+  gc({ path: location.pathname });
+  if (fromCard) gc({ path: 'card-scan', title: 'Scanned the card', event: true });
+  var track = function (sel, name) {
+    var els = document.querySelectorAll(sel);
+    for (var t = 0; t < els.length; t++) els[t].addEventListener('click', function () { gc({ path: name, title: name, event: true }); });
+  };
+  track('a[href*="calendar.app.google"]', 'click-book');
+  track('a[href*="linkedin.com"]', 'click-linkedin');
+  track('[data-cv]', 'click-cv');
+  track('[data-share]', 'click-share');
+  track('[data-mail]', 'click-email');
+
   // ---- welcome line for people who scanned the card (QR adds ?c), then clean the address ----
   try {
-    if (/[?&]c\b/.test(location.search)) {
+    if (fromCard) {
       var wl = document.getElementById('welcome');
       if (wl) {
         wl.hidden = false;
