@@ -3,29 +3,34 @@
   var hl = document.getElementById('hl');
   if (hl) {
     var ps = hl.querySelectorAll('.tx p');
-    var dotsBox = hl.querySelector('.dots');
-    var dots = [];
-    for (var d = 0; d < ps.length; d++) {
-      var dot = document.createElement('i');
-      if (d === 0) dot.className = 'on';
-      dotsBox.appendChild(dot);
-      dots.push(dot);
-    }
+    var cnt = hl.querySelector('.cnt');
+    var bar = hl.querySelector('.bar i');
     var i = 0, timer = null, DELAY = 5500;
-    var show = function (n) {
-      ps[i].classList.remove('on'); dots[i].classList.remove('on');
-      i = (n + ps.length) % ps.length;
-      ps[i].classList.add('on'); dots[i].classList.add('on');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var runBar = function () {
+      if (!bar) return;
+      bar.classList.remove('run'); void bar.offsetWidth; bar.classList.add('run');
     };
-    var start = function () { stop(); timer = setInterval(function () { show(i + 1); }, DELAY); };
-    var stop = function () { if (timer) clearInterval(timer); timer = null; };
-    hl.setAttribute('tabindex', '0');
+    var show = function (n) {
+      ps[i].classList.remove('on');
+      i = (n + ps.length) % ps.length;
+      ps[i].classList.add('on');
+      if (cnt) cnt.textContent = (i + 1) + ' / ' + ps.length;
+    };
+    var stop = function () { if (timer) clearTimeout(timer); timer = null; if (bar) bar.classList.remove('run'); };
+    var start = function () {
+      stop(); if (reduce) return;
+      runBar();
+      timer = setTimeout(function () { show(i + 1); start(); }, DELAY);
+    };
+    hl.querySelector('.nx').addEventListener('click', function (e) { e.stopPropagation(); show(i + 1); start(); });
+    hl.querySelector('.pv').addEventListener('click', function (e) { e.stopPropagation(); show(i - 1); start(); });
     hl.addEventListener('click', function () { show(i + 1); start(); });
     hl.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i + 1); start(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); start(); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); start(); }
     });
-    hl.addEventListener('mouseenter', stop);
+    hl.addEventListener('mouseenter', function () { stop(); });
     hl.addEventListener('mouseleave', start);
     document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
     start();
