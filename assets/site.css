@@ -65,3 +65,55 @@ h1{font:800 23px/1.15 var(--font);letter-spacing:-.025em;margin:0;white-space:no
 @media (prefers-reduced-motion:reduce){
   .hl .tx p,.dots i,.cta{transition:none}
 }
+
+/* ---------- about ---------- */
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+.page{max-width:680px;margin:0 auto;padding:0 20px 40px}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;margin:0 -20px;padding:10px 20px;background:rgba(251,249,246,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(235,230,222,.7)}
+.back{font:700 14px var(--font);text-decoration:none;color:var(--blue);white-space:nowrap}
+.jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.jump::-webkit-scrollbar{display:none}
+.jump a{font:600 12.5px var(--font);text-decoration:none;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);white-space:nowrap}
+.ahero{display:flex;gap:14px;align-items:center;margin-top:26px}
+.lead{margin-top:22px}
+.lead .title{text-align:left}
+.lead p:not(.title){font:400 15.5px/1.65 var(--font);color:var(--body);margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px}
+.stats div{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(20,33,61,.05)}
+.stats b{display:block;font:800 26px var(--font);color:var(--blue);letter-spacing:-.02em}
+.stats span{font:500 13px/1.35 var(--font);color:var(--body)}
+.sec{margin-top:40px}
+.sec h2{font:800 21px var(--font);letter-spacing:-.02em;margin:0}
+.hint{font:500 13px var(--font);color:var(--mute);margin-top:4px}
+.org{font:800 14px var(--font);margin:20px 0 0;padding-left:2px}
+.org span{display:block;font:500 12.5px var(--font);color:var(--mute);margin-top:2px}
+.role{background:var(--card);border-radius:14px;margin-top:10px;box-shadow:0 6px 18px rgba(20,33,61,.05);overflow:hidden}
+.role summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;position:relative;display:flex;flex-direction:column;gap:3px}
+.role summary::-webkit-details-marker{display:none}
+.role summary:after{content:"";position:absolute;right:18px;top:22px;width:8px;height:8px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg);transition:transform .2s}
+.role[open] summary:after{transform:rotate(-135deg);top:26px}
+.when{font:700 11.5px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.what{font:700 15.5px/1.35 var(--font)}
+.where{font:500 13px/1.4 var(--font);color:var(--mute)}
+.role ul{margin:0;padding:2px 18px 16px 34px;font:400 14.5px/1.6 var(--font);color:var(--body)}
+.role li{margin-top:6px}
+.role li::marker{color:var(--blue)}
+.cards{display:grid;gap:10px;margin-top:14px}
+.cards div{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(20,33,61,.05)}
+.cards h3{font:700 15.5px var(--font);margin:0}
+.cards p{font:400 14.5px/1.55 var(--font);color:var(--body);margin-top:6px}
+.sub{font:700 11px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:18px 0 8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{font:600 13px var(--font);padding:7px 11px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.pills span.b{background:var(--blueSoft);border-color:var(--blueLine);color:var(--blueDeep)}
+.edu{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.edu li{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(20,33,61,.05)}
+.edu b{display:block;font:700 15px/1.35 var(--font)}
+.edu span{display:block;font:500 13px/1.4 var(--font);color:var(--mute);margin-top:3px}
+.end{margin-top:44px}
+.endt{font:800 21px var(--font);letter-spacing:-.02em;text-align:center;margin-bottom:14px}
+@media (min-width:700px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .cards{grid-template-columns:1fr 1fr}
+}
+@media (max-width:430px){.topbar{gap:8px}.jump{gap:4px}.jump a{font-size:12px;padding:5px 8px}.back{font-size:13px}}
