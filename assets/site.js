@@ -49,7 +49,14 @@
   // ---- welcome line for people who scanned the card (QR adds ?c), then clean the address ----
   try {
     if (/[?&]c\b/.test(location.search)) {
-      var wl = document.getElementById('welcome'); if (wl) wl.hidden = false;
+      var wl = document.getElementById('welcome');
+      if (wl) {
+        wl.hidden = false;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { wl.classList.add('in'); }); });
+        var hideW = function () { wl.classList.remove('in'); setTimeout(function () { wl.hidden = true; }, 450); };
+        setTimeout(hideW, 3800);
+        wl.addEventListener('click', hideW);
+      }
       history.replaceState(null, '', location.pathname);
     }
   } catch (e) {}

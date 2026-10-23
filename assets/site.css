@@ -170,8 +170,16 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 .share span{color:var(--blue);font-weight:700}
 .mid,.hl,.cloud,.actions{margin-top:20px}
 .share{margin-top:6px;padding:4px 6px}
-.home:has(.welcome:not([hidden])){padding-top:22px}
+
 .welcome{margin:0 0 14px}
 .home{padding-bottom:14px}.cloud{gap:7px}
 .welcome{margin:0 0 8px;padding:5px 12px}
-.home:has(.welcome:not([hidden])){padding-top:14px}
+
+
+/* welcome bubble for card visitors: floats over the page, then fades out */
+.welcome{position:fixed;left:50%;top:22px;z-index:20;transform:translate(-50%,-14px);opacity:0;transition:opacity .4s,transform .4s;display:flex;align-items:center;gap:12px;margin:0;width:max-content;max-width:calc(100% - 32px);background:#fff;color:var(--ink);border:1px solid var(--blueLine);border-radius:18px;padding:14px 20px 14px 14px;box-shadow:0 16px 40px rgba(20,33,61,.18);font:600 15px/1.35 var(--font);cursor:pointer}
+.welcome.in{opacity:1;transform:translate(-50%,0)}
+.welcome b{display:block;font-weight:800;color:var(--blue)}
+.welcome .wi{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font:800 17px var(--font);flex:none}
+@media (prefers-reduced-motion:reduce){.welcome{transition:none}}
+.welcome[hidden]{display:none}

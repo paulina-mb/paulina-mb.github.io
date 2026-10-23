@@ -16,11 +16,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=11">
+<link rel="stylesheet" href="assets/site.css?v=12">
 </head>
 <body>
 <main class="home">
-  <p class="welcome" id="welcome" hidden>You picked up my card. Thank you!</p>
   <header class="hero">
     <img class="av" src="assets/paulina.jpg" alt="Paulina Madrigal Baeza" width="68" height="68">
     <div>
@@ -91,6 +90,8 @@
   </nav>
 </main>
 
+<div class="welcome" id="welcome" role="status" hidden><span class="wi" aria-hidden="true">✓</span><span>You picked up my card.<b>Thank you!</b></span></div>
+
 <div class="modal" id="cvmsg" role="dialog" aria-modal="true" aria-labelledby="cvt" hidden>
   <div class="box">
     <p class="k">Download started</p>
@@ -102,6 +103,6 @@
   </div>
 </div>
 
-<script src="assets/site.js?v=11"></script>
+<script src="assets/site.js?v=12"></script>
 </body>
 </html>
