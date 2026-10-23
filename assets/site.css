@@ -127,7 +127,7 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 .hl .tx{margin-top:6px}
 .hl .bar{height:3px;border-radius:2px;background:#e7ecf7;margin-top:12px;overflow:hidden}
 .hl .bar i{display:block;height:100%;width:0;background:var(--blue);border-radius:2px}
-.hl .bar i.run{width:100%;transition:width 5.5s linear}
+.hl .bar i.run{width:100%;transition-property:width;transition-timing-function:linear}
 .hl.paused .bar i.run{transition:none}
 @media (prefers-reduced-motion:reduce){.hl .bar{display:none}}
 .hl{padding:12px 14px 14px 20px}.hl .tx{margin-top:4px}.hl .bar{margin-top:10px;margin-right:6px}
