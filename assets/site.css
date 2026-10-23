@@ -173,3 +173,5 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 .home:has(.welcome:not([hidden])){padding-top:22px}
 .welcome{margin:0 0 14px}
 .home{padding-bottom:14px}.cloud{gap:7px}
+.welcome{margin:0 0 8px;padding:5px 12px}
+.home:has(.welcome:not([hidden])){padding-top:14px}
