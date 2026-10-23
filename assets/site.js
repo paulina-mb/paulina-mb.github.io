@@ -45,6 +45,27 @@
     start();
   }
 
+
+  // ---- welcome line for people who scanned the card (QR adds ?c), then clean the address ----
+  try {
+    if (/[?&]c\b/.test(location.search)) {
+      var wl = document.getElementById('welcome'); if (wl) wl.hidden = false;
+      history.replaceState(null, '', location.pathname);
+    }
+  } catch (e) {}
+
+  // ---- share ("escalate to your manager" from the card) ----
+  var sh = document.querySelector('[data-share]');
+  if (sh) {
+    sh.addEventListener('click', async function () {
+      var url = 'https://paulina-mb.github.io/';
+      var data = { title: 'Paulina Madrigal Baeza | IT Service Delivery & Operations', text: 'Worth a look: Paulina Madrigal Baeza, IT Service Delivery & Operations in Toronto.', url: url };
+      try { if (navigator.share) { await navigator.share(data); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
+      try { await navigator.clipboard.writeText(url); sh.querySelector('span').textContent = 'Link copied'; setTimeout(function () { sh.querySelector('span').textContent = 'Share this page'; }, 2000); }
+      catch (e) { window.prompt('Copy this link:', url); }
+    });
+  }
+
   // ---- message after CV download ----
   var modal = document.getElementById('cvmsg');
   var cv = document.querySelector('[data-cv]');
